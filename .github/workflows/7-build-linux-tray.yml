@@ -91,11 +91,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          TAG="v${VERSION}"
+          TAG="tray-v${VERSION}"
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Release 已存在，追加文件"
             gh release upload "$TAG" release_files/* --clobber
           else
             echo "创建新 Release"
-            gh release create "$TAG" release_files/* --title "$TAG" --generate-notes
+            gh release create "$TAG" release_files/* --title "ESurfingClient Tray ${TAG}" --generate-notes
           fi
